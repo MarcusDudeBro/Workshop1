@@ -7,19 +7,19 @@ mpHands = mp.solutions.hands
 hands = mpHands.Hands(max_num_hands=1, min_detection_confidence=0.7)
 mpDraw = mp.solutions.drawing_utils
 
+# save screen size
 s = pyautogui.size()
 
 # Initialize webcam
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(1) 
 while True:
     # capture webcame frame and shape (width and height)
     ret, frame = cap.read()
     x, y, c = frame.shape
     # defining the frame
     frame = cv2.flip(frame, 1)
-    framergb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     # have mediapipe hands predict hand landmarks
-    result = hands.process(framergb)
+    result = hands.process(frame)
     # iterate through the predicted landmarks adjusting them to the window, and 
     # and outputting them to the opencv window
     if result.multi_hand_landmarks:
